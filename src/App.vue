@@ -6,7 +6,8 @@
     <Header v-bind:isUserLogin="isUserLogin"></Header>
     <Login v-show="!isUserLogin" v-on:userLogin="login" v-on:userRegister="register"></Login>
     <Content v-show="isUserLogin"></Content>
-    <TextImage v-show="isUserLogin"></TextImage>
+    <TextImage v-show="isUserLogin" v-if="imageUrl == ''" v-on:image-link="getImage"></TextImage>
+    <ImageResult :imageUrl="imageUrl" v-if="imageUrl != ''"></ImageResult>
     <Footer></Footer>
   </div>
 </template>
@@ -18,6 +19,7 @@ import Login from "./components/Login";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
 import TextImage from "./components/TextImage"
+import ImageResult from "./components/ImageResult"
 
 export default {
   name: "app",
@@ -25,7 +27,8 @@ export default {
     return {
       isUserLogin: false, // 0 --- login page, 1 --- content page
       message: "Hi, Markus!",
-      count: 0
+      count: 0,
+      imageUrl: ''
     };
   },
   components: {
@@ -33,7 +36,8 @@ export default {
     Login,
     Content,
     Footer,
-    TextImage
+    TextImage,
+    ImageResult
   },
   methods: {
     addCounter(increment, thres) {
@@ -57,6 +61,10 @@ export default {
 
       // kalau berhasil
       this.isUserLogin = true;
+    },
+    getImage(val){
+      console.log(val)
+      this.imageUrl = val
     }
   }
 };

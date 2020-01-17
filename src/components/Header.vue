@@ -1,7 +1,7 @@
 <template>
   <header>
-    <nav class="navbar navbar-light bg-light">
-      <div class="container">
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
         <a class="navbar-brand">Pujangga Senja</a>
         <form v-on:click.prevent v-show="isUserLogin" class="form-inline">
           <button
@@ -27,4 +27,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="css" scoped>
+  header nav{
+    background-color: rgba(34, 47, 62,0.5) !important;
+  }
+
+  header nav a {
+    color: white !important;
+    font-weight: 800;
+    font-size: 28px;
+  }
+</style>

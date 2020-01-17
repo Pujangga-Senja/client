@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container overflow-y" id="form-image">
     <b-form @submit.prevent="submitData" @reset="reset">
       <b-form-group id="input-group-2" label="Your Quotes" label-for="input-2">
         <b-form-input id="input-2" v-model="form.quote" required placeholder="Your quotes here"></b-form-input>
@@ -162,4 +162,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  .container {
+    padding: 20px;
+    background-color:  rgba(34, 47, 62,0.5);
+    color: white; 
+    margin-top: 40px;
+    margin-bottom: 80px;
+  }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="content">
-    <div class="sidebar">
+    <!-- <div class="sidebar">
       <div class="view-all"></div>
       <div class="create-image"></div>
     </div>
@@ -13,7 +13,7 @@
         <p class="details"></p>
         <button class="delete btn btn-danger">DELETE</button>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 

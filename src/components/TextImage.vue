@@ -2,7 +2,7 @@
   <div class="container overflow-y" id="form-image">
     <b-form @submit.prevent="submitData" @reset="reset">
       <b-form-group id="input-group-2" label="Your Quotes" label-for="input-2">
-        <b-form-input id="input-2" v-model="form.quote" required placeholder="Your quotes here"></b-form-input>
+        <b-form-input id="input-2" v-model="form.quote" required ></b-form-input>
       </b-form-group>
 
       <b-form-group id="input-group-20" label="Author" label-for="input-20">
@@ -127,7 +127,7 @@ export default {
   },
   methods: {
     reset: function() {
-      (this.quote = ""),
+        (this.quote = ""),
         (this.author = ""),
         (this.fontSize = ""),
         (this.quoteFont = null),
@@ -147,7 +147,7 @@ export default {
       let data = this.form;
       console.log(data);
       axios
-        .post("http://localhost:3000/image/transform", data)
+        .post("http://35.192.129.227/image/transform", data)
         .then(({ data }) => {
           console.log(data);
           return this.$emit("image-link", data.url);
@@ -156,6 +156,13 @@ export default {
           // eslint-disable-next-line-no console
           console.log(err);
         });
+    }
+  },
+  props: ['textResult'],
+  watch: {
+    textResult: function(n, o) {
+      console.log(o)
+      this.form.quote = n
     }
   }
 };

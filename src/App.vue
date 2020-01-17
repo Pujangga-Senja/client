@@ -1,14 +1,10 @@
 <template>
   <div id="app">
     <Header v-on:userLogout="logout" v-bind:isUserLogin="isUserLogin"></Header>
-<<<<<<< HEAD
     <Login v-show="!isUserLogin" v-on:userLogin="login" v-on:userRegister="register"></Login>
-    <AudioForm></AudioForm>
-=======
-    <Login v-show="!isUserLogin" v-on:userLogin="login" v-on:userRegister="register" :errorStatus="errorStatus"></Login>
->>>>>>> edit layout
+    <AudioForm v-show="isUserLogin" v-on:textResult="getText" v-show="isUserLogin"></AudioForm>
     <Content v-show="isUserLogin"></Content>
-    <TextImage v-show="isUserLogin" v-if="imageUrl == ''" v-on:image-link="getImage"></TextImage>
+    <TextImage v-show="isUserLogin" v-if="imageUrl == ''" v-on:image-link="getImage" :textResult="textResult"></TextImage>
     <ImageResult :imageUrl="imageUrl" v-if="imageUrl != ''"></ImageResult>
     <Footer></Footer>
   </div>
@@ -31,7 +27,8 @@ export default {
     return {
       isUserLogin: false, // 0 --- login page, 1 --- content page
       imageUrl: "",
-      errorStatus: null
+      errorStatus: null,
+      textResult: ''
     };
   },
   components: {
@@ -78,6 +75,7 @@ export default {
     },
     logout() {
       localStorage.removeItem("token");
+      this.imageUrl = ''
       this.isUserLogin = false;
     },
     beforeCreate() {
@@ -92,6 +90,9 @@ export default {
     getImage(val) {
       console.log(val);
       this.imageUrl = val;
+    },
+    getText(val){
+      this.textResult = val
     }
   },
   created: function(){

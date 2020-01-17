@@ -34,7 +34,7 @@ export default {
       fd.append('fileName', this.file)
       axios({
         method: 'post',
-        url: 'http://localhost:3000/audio',
+        url: 'http://35.192.129.227/audio',
         headers: {
           'Content-Type': 'multipart/form-data',
           access_token: localStorage.getItem('access_token')
@@ -48,6 +48,7 @@ export default {
             text: "Submitted!"
           })
           this.textResult = data
+          return this.$emit('textResult', this.textResult)
         })
         .catch(err => {
           Swal.fire({
@@ -67,6 +68,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .container {
+    margin-top: 3vh
+  }
 
 </style>

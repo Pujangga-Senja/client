@@ -2,9 +2,9 @@
   <div id="app">
     <Header v-on:userLogout="logout" v-bind:isUserLogin="isUserLogin"></Header>
     <Login v-show="!isUserLogin" v-on:userLogin="login" v-on:userRegister="register"></Login>
-    <AudioForm></AudioForm>
+    <AudioForm v-show="isUserLogin" v-on:textResult="getText" v-show="isUserLogin"></AudioForm>
     <Content v-show="isUserLogin"></Content>
-    <TextImage v-show="isUserLogin" v-if="imageUrl == ''" v-on:image-link="getImage"></TextImage>
+    <TextImage v-show="isUserLogin" v-if="imageUrl == ''" v-on:image-link="getImage" :textResult="textResult"></TextImage>
     <ImageResult :imageUrl="imageUrl" v-if="imageUrl != ''"></ImageResult>
     <Footer></Footer>
   </div>
@@ -26,7 +26,9 @@ export default {
   data() {
     return {
       isUserLogin: false, // 0 --- login page, 1 --- content page
-      imageUrl: ""
+      imageUrl: "",
+      errorStatus: null,
+      textResult: ''
     };
   },
   components: {
@@ -41,19 +43,23 @@ export default {
   methods: {
     login(data) {
       axios
-        .post("http://localhost:3000/users/login", {
+        .post("http://35.192.129.227/users/login", {
           email: data.email,
           password: data.password
         })
         .then(response => {
+          console.log(response)
           localStorage.setItem("token", response.data.token);
           this.isUserLogin = true;
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+          this.errorStatus = err.response.status
+          console.log(err.response.status)
+        });
     },
     register(data) {
       axios
-        .post("http://localhost:3000/users/register", {
+        .post("http://35.192.129.227/users/register", {
           email: data.email,
           password: data.password
         })
@@ -69,6 +75,7 @@ export default {
     },
     logout() {
       localStorage.removeItem("token");
+      this.imageUrl = ''
       this.isUserLogin = false;
     },
     beforeCreate() {
@@ -83,10 +90,27 @@ export default {
     getImage(val) {
       console.log(val);
       this.imageUrl = val;
+    },
+    getText(val){
+      this.textResult = val
+    }
+  },
+  created: function(){
+    if(localStorage.hasOwnValue('token')){
+      this.isLogin = true
     }
   }
 };
 </script>
 
-<style>
+<style lang="css">
+  body, html{
+    height: 100%;
+    width: 100%;
+  }
+  body{
+    background-image: url('./assets/langit-senja.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 </style>

@@ -1,12 +1,21 @@
 <template>
     <div class="container">
-        <b-form @submit="submitData" @reset="reset">
+        <b-form @submit.prevent="submitData" @reset="reset">
             <b-form-group id="input-group-2" label="Your Quotes" label-for="input-2">
                 <b-form-input
                 id="input-2"
                 v-model="form.quote"
                 required
                 placeholder="Your quotes here"
+                ></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-20" label="Author" label-for="input-20">
+                <b-form-input
+                id="input-20"
+                v-model="form.author"
+                required
+                placeholder="Your name here"
                 ></b-form-input>
             </b-form-group>
 
@@ -61,7 +70,6 @@
                 v-model="form.enableHighlight"
                 name="checkbox-1"
                 value="1"
-                unchecked-value="0"
                 ></b-form-checkbox>
             </b-form-group>
 
@@ -90,6 +98,15 @@
                 v-model="form.backgroundColor"
                 required
                 ></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-15" label="Gradient Type" label-for="input-15">
+                <b-form-select
+                id="input-15"
+                v-model="form.gradientType"
+                :options="gradients"
+                required
+                ></b-form-select>
             </b-form-group>
 
             <b-form-group id="input-group-12" label="Gradient Color 1" label-for="input-12">
@@ -130,6 +147,7 @@
 import axios from 'axios'
 
 export default {
+    name: "TextImage",
     data() {
         return {
             form: {
@@ -140,7 +158,7 @@ export default {
                 quoteFontColor: '',
                 authorFont: null,
                 authorFontColor: '',
-                enableHighlight: '',
+                enableHighlight: '0',
                 highlightColor: '',
                 bgType: '',
                 backgroundColor: '',
@@ -179,14 +197,15 @@ export default {
         },
         submitData: function(){
             let data = this.form
+            console.log(data)
             axios.post('http://localhost:3000/image/transform', data)
-                .then(data => {
+                .then(({data}) => {
                     console.log(data)
                     return this.$emit('image-link', data.url)
                 })
                 .catch(err => {
                     // eslint-disable-next-line-no console
-                    return err
+                    console.log(err)
                 })
         }
     },

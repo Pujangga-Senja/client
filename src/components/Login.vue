@@ -6,12 +6,12 @@
           <div class="card-header">Login</div>
           <form v-on:click.prevent>
             <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
+              <label for="inputEmailLogin">Email address</label>
               <input
                 v-model="userLoginData.email"
                 type="email"
                 class="form-control"
-                id="exampleInputEmail1"
+                id="inputEmailLogin"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
               />
@@ -21,19 +21,19 @@
               >We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
+              <label for="inputPasswordLogin">Password</label>
               <input
                 v-model="userLoginData.password"
                 type="password"
                 class="form-control"
-                id="exampleInputPassword1"
+                id="inputPasswordLogin"
                 placeholder="Password"
               />
             </div>
-            <div class="form-group form-check">
+            <!-- <div class="form-group form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1" />
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
+            </div>-->
             <button
               v-on:click="$emit('userLogin', userLoginData)"
               type="submit"
@@ -47,12 +47,12 @@
           <form>
             <!-- email -->
             <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
+              <label for="inputEmailRegister">Email address</label>
               <input
                 v-model="userRegisterData.email"
                 type="email"
                 class="form-control"
-                id="exampleInputEmail1"
+                id="inputEmailRegister"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
               />
@@ -64,19 +64,19 @@
 
             <!-- password -->
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
+              <label for="inputPasswordRegister">Password</label>
               <input
                 v-model="userRegisterData.password"
                 type="password"
                 class="form-control"
-                id="exampleInputPassword1"
+                id="inputPasswordRegister"
                 placeholder="Password"
               />
             </div>
-            <div class="form-group form-check">
+            <!-- <div class="form-group form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1" />
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
+            </div>-->
             <button v-on:click="$emit('userRegister', userRegisterData)">Submit</button>
           </form>
         </div>

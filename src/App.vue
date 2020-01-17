@@ -2,6 +2,7 @@
   <div id="app">
     <Header v-on:userLogout="logout" v-bind:isUserLogin="isUserLogin"></Header>
     <Login v-show="!isUserLogin" v-on:userLogin="login" v-on:userRegister="register"></Login>
+    <AudioForm></AudioForm>
     <Content v-show="isUserLogin"></Content>
     <TextImage v-show="isUserLogin" v-if="imageUrl == ''" v-on:image-link="getImage"></TextImage>
     <ImageResult :imageUrl="imageUrl" v-if="imageUrl != ''"></ImageResult>
@@ -16,6 +17,7 @@ import Content from "./components/Content";
 import Footer from "./components/Footer";
 import TextImage from "./components/TextImage";
 import ImageResult from "./components/ImageResult";
+import AudioForm from './components/AudioForm'
 // eslint-disable-next-line no-unused-vars
 import axios from "axios";
 
@@ -33,7 +35,8 @@ export default {
     Content,
     Footer,
     TextImage,
-    ImageResult
+    ImageResult,
+    AudioForm
   },
   methods: {
     login(data) {

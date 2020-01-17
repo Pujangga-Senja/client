@@ -14,6 +14,7 @@
                 id="inputEmailLogin"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
+                required
               />
               <small
                 id="emailHelp"
@@ -28,23 +29,21 @@
                 class="form-control"
                 id="inputPasswordLogin"
                 placeholder="Password"
+                required
               />
             </div>
-            <!-- <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>-->
             <button
               v-on:click="$emit('userLogin', userLoginData)"
               type="submit"
               class="btn btn-primary"
             >Submit</button>
+            <!-- <div class="g-signin2 btn" v-on:click="onSignIn"></div> -->
           </form>
         </div>
 
         <div class="card col">
           <div class="card-header">Register</div>
-          <form>
+          <form v-on:click.prevent>
             <!-- email -->
             <div class="form-group">
               <label for="inputEmailRegister">Email address</label>
@@ -73,11 +72,11 @@
                 placeholder="Password"
               />
             </div>
-            <!-- <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>-->
-            <button v-on:click="$emit('userRegister', userRegisterData)">Submit</button>
+            <button
+              v-on:click="$emit('userRegister', userRegisterData)"
+              type="submit"
+              class="btn btn-primary"
+            >Submit</button>
           </form>
         </div>
       </div>

@@ -49,10 +49,20 @@ export default {
         .catch(err => console.error(err));
     },
     register(data) {
-      console.log(data);
+      axios
+        .post("http://localhost:3000/users/register", {
+          email: data.email,
+          password: data.password
+        })
+        .then(response => {
+          console.log(response);
+
+          return this.login(data);
+        })
+        .catch(err => console.log(Object.keys(err)));
 
       // kalau berhasil
-      this.isUserLogin = true;
+      // this.isUserLogin = true;
     },
     logout() {
       localStorage.removeItem("token");

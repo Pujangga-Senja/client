@@ -6,6 +6,7 @@
     <Header v-bind:isUserLogin="isUserLogin"></Header>
     <Login v-show="!isUserLogin" v-on:userLogin="login" v-on:userRegister="register"></Login>
     <Content v-show="isUserLogin"></Content>
+    <TextImage v-show="isUserLogin"></TextImage>
     <Footer></Footer>
   </div>
 </template>
@@ -16,6 +17,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
+import TextImage from "./components/TextImage"
 
 export default {
   name: "app",
@@ -30,7 +32,8 @@ export default {
     Header,
     Login,
     Content,
-    Footer
+    Footer,
+    TextImage
   },
   methods: {
     addCounter(increment, thres) {

@@ -11,7 +11,7 @@
           <figcaption></figcaption>
         </figure>
         <p class="details"></p>
-        <button class="delete">DELETE</button>
+        <button class="delete btn btn-danger">DELETE</button>
       </div>
     </div>
   </div>

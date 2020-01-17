@@ -2,7 +2,7 @@
   <div id="app">
     <Header v-on:userLogout="logout" v-bind:isUserLogin="isUserLogin"></Header>
     <Login v-show="!isUserLogin" v-on:userLogin="login" v-on:userRegister="register"></Login>
-    <AudioForm v-show="isUserLogin" v-on:textResult="getText" v-show="isUserLogin"></AudioForm>
+    <AudioForm v-show="isUserLogin" v-on:textResult="getText"></AudioForm>
     <Content v-show="isUserLogin"></Content>
     <TextImage v-show="isUserLogin" v-if="imageUrl == ''" v-on:image-link="getImage" :textResult="textResult"></TextImage>
     <ImageResult :imageUrl="imageUrl" v-if="imageUrl != ''"></ImageResult>
@@ -39,6 +39,13 @@ export default {
     TextImage,
     ImageResult,
     AudioForm
+  },
+  created() {
+    if(localStorage.getItem('token')) {
+      this.isUserLogin = true
+    } else {
+      this.isUserLogin = false
+    }
   },
   methods: {
     login(data) {
@@ -95,11 +102,11 @@ export default {
       this.textResult = val
     }
   },
-  created: function(){
-    if(localStorage.hasOwnValue('token')){
-      this.isLogin = true
-    }
-  }
+  // created: function(){
+  //   if(localStorage.hasOwnValue('token')){
+  //     this.isLogin = true
+  //   }
+  // }
 };
 </script>
 

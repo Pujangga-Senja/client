@@ -42,6 +42,7 @@ export default {
         data: fd
       })
         .then(({ data }) => {
+          this.upload()
           console.log(data)
           Swal.fire({
             icon: 'success',
@@ -58,6 +59,21 @@ export default {
           })
         })
     },
+    upload() {
+      let fd = new FormData()
+      fd.append('filename', this.file)
+      axios({
+        method:'post',
+        url:'http://35.192.129.227/upload',
+        data: fd,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+      .then( ({data}) => console.log(data))
+      .catch( err => console.log(err))
+    }
     // watch: {
     //   textResult(n, o) {
     //     console.log(o)
